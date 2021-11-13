@@ -38,9 +38,10 @@
                             <span asp-validation-for="FechaReserva" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="MesaId" class="control-label"></label>
+                            <label asp-for="MesaId" class="control-label">Número de mesa: @Model.Mesa.NumeroMesa</label>
+                            <input  name="id" type="hidden" value="@Model.Mesa.Id" />
                             <select asp-for="MesaId" class="form-control">
-                                <option >@Model.Mesa.NumeroMesa</option>
+                                <option value="@Model.Mesa.Id">--- Seleccionar una mesa ---</option>
                                 @foreach (var item in mesa)
                                 {
                                     <option value="@item.Id">@item.NumeroMesa</option>

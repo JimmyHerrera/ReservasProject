@@ -69,12 +69,36 @@ namespace Reservas.Controllers
         //Http Post Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Reserva reserva)
+        public IActionResult Edit(Reserva reserva,int id)
         {
             if (ModelState.IsValid)
             {
-                _context.Reserva.Update(reserva);
-                _context.SaveChanges();
+                if(id == reserva.MesaId)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var a = _context.Reserva.Where(i => id == reserva.Id).FirstOrDefault();
+                    a.MesaId = reserva.MesaId;
+                    _context.Reserva.Update(a);
+                    _context.SaveChanges();
+
+                   var tmp = _context.Mesa.Where(a => a.Id == id).FirstOrDefault();
+                    tmp.Estado = 1;
+
+                    _context.Update(tmp);
+                    _context.SaveChanges();
+
+                    var mesa = _context.Mesa.Where(a => a.Id == reserva.MesaId).FirstOrDefault();
+                    mesa.Estado = 3;
+                    
+                    _context.Update(mesa);
+                    _context.SaveChanges();
+
+                   
+                }
+
 
                 TempData["mensaje"] = "La reserva se ha editado correctamente";
                 return RedirectToAction("Index");
