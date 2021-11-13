@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Reservas.Data;
 using Reservas.Interfaces;
 using Reservas.Models;
@@ -24,20 +25,30 @@ namespace Reservas.Controllers
             this.mesasInterface = mesasInterface;
         }
 
-        [Authorize]
+        /*[Authorize]
         //Http Get Index
         public IActionResult Index()
         {
             var listaMesas = reservasInterface.getLista();
             //IEnumerable<Mesa> listMesas = _context.Mesa;
             return View(listaMesas);
+        }*/
+
+        [Authorize]
+        //Http Get Index
+        public IActionResult Index(string? criterio)
+        {
+           // var listaMesas = reservasInterface.getLista();
+           var listaMesas = reservasInterface.getLista(criterio);
+            return View(listaMesas);
         }
+
 
         [Authorize]
         //Http Get Create
         public IActionResult Create()
         {
-            ViewBag.Mesa = _context.Mesa.Where(m=> m.Estado == 1).ToList();
+            ViewBag.Mesa = _context.Mesa.Where(m=> m.Estado == 2).ToList();
             return View();
         }
 
@@ -85,7 +96,7 @@ namespace Reservas.Controllers
                     _context.SaveChanges();
 
                    var tmp = _context.Mesa.Where(a => a.Id == id).FirstOrDefault();
-                    tmp.Estado = 1;
+                    tmp.Estado = 2;
 
                     _context.Update(tmp);
                     _context.SaveChanges();
@@ -117,13 +128,8 @@ namespace Reservas.Controllers
 
             //Obtener la mesa
 
-            var reserva = _context.Reserva.Find(id);
+            var reserva = _context.Reserva.Where(i => i.Id == id).Include(a => a.Mesa).FirstOrDefault();
 
-            if (reserva == null)
-            {
-                return NotFound();
-            }
-            ViewBag.Mesa = _context.Mesa.Where(m => m.Estado == 1).ToList();
 
             return View(reserva);
         }
@@ -134,16 +140,17 @@ namespace Reservas.Controllers
         public IActionResult DeleteReserva(int? id)
         {
             //Obtener mesa por id
-
+            
             var reserva = _context.Reserva.Find(id);
 
-            if (reserva == null)
-            {
-                return NotFound();
-            }
-
-
             _context.Reserva.Remove(reserva);
+            _context.SaveChanges();
+
+
+            var mesa = _context.Mesa.Where(a => a.Id == reserva.MesaId).FirstOrDefault();
+            mesa.Estado = 2;
+
+            _context.Update(mesa);
             _context.SaveChanges();
 
             TempData["mensaje"] = "La reserva se ha eliminado correctamente";

@@ -22,7 +22,7 @@
             <h3>Lista de Mesas</h3>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Mesas">Agregar nueva mesa</a>
+            <a class="btn btn-success d-block" id="agregarNuevaMesa" asp-action="Create" asp-controller="Mesas">Agregar nueva mesa</a>
         </div>
     </div>
 
@@ -40,17 +40,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model)
+                    @foreach (var item in Model)
                     {
                     <tr>
                         <td>@item.NumeroMesa</td>
                         <td>@item.NumeroPersonas</td>
                         <td>@item.Descripcion</td>
-                        <td>@item.Estado</td>
-                        <td>
-                            <a asp-controller="Mesas" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
-                            <a asp-controller="Mesas" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
-                        </td>
+
+                        @if (@item.Estado == 1)
+                        {
+                            <td>Creado</td>
+                        }
+
+                        @if (@item.Estado == 2)
+                        {
+                            <td>Libre</td>
+                        }
+
+                        @if (@item.Estado == 3)
+                        {
+                            <td>Reservado</td>
+                        }
+
+                        @if (item.Estado == 1 | item.Estado == 2)
+                    {
+                    <td>
+                        <a asp-controller="Mesas" asp-action="Edit" id="editMesa" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                        <a asp-controller="Mesas" asp-action="Delete" id="deleteMesa" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                    </td>
+                    }
+
+                        
                     </tr>
                     }
                 </tbody>

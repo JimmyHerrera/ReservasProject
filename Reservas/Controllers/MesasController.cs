@@ -23,22 +23,19 @@ namespace Reservas.Controllers
         }
 
         [Authorize]
-        //Http Get Index
         public IActionResult Index()
         {
             var listaMesas = mesaInterface.getLista();
             return View(listaMesas);
         }
 
-        //Http Get Create
+       
         [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-
-        //Http Post Create
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -54,28 +51,14 @@ namespace Reservas.Controllers
             return View();
         }
 
-        //Http Get Edit
+
         [Authorize]
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            //Obtener el libro
-
-            var mesa = _context.Mesa.Find(id);
-
-            if(mesa == null)
-            {
-                return NotFound();
-            }
-
+            var mesa = mesaInterface.getMesa(id);
             return View(mesa);
         }
 
-        //Http Post Edit
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -83,8 +66,7 @@ namespace Reservas.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Mesa.Update(mesa);
-                _context.SaveChanges();
+                mesaInterface.updateMesa(mesa);
 
                 TempData["mensaje"] = "La mesa se ha editado correctamente";
                 return RedirectToAction("Index");
@@ -93,45 +75,21 @@ namespace Reservas.Controllers
             return View();
         }
 
-        //Http Get Delete
+        
         [Authorize]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            //Obtener la mesa
-
-            var mesa = _context.Mesa.Find(id);
-
-            if (mesa == null)
-            {
-                return NotFound();
-            }
-
+            var mesa = mesaInterface.getMesa(id);
             return View(mesa);
         }
 
-        //Http Post Delete
+        
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMesa(int? id)
         {
-            //Obtener mesa por id
-
-            var mesa = _context.Mesa.Find(id);
-
-            if (mesa == null)
-            {
-                return NotFound();
-            }
-
-
-            _context.Mesa.Remove(mesa);
-            _context.SaveChanges();
+            mesaInterface.deleteMesa(id);
 
             TempData["mensaje"] = "La mesa se ha eliminado correctamente";
             return RedirectToAction("Index");

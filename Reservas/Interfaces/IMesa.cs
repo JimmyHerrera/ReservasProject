@@ -11,5 +11,8 @@ namespace Reservas.Interfaces
         IEnumerable<Mesa> getLista();
         IEnumerable<Mesa> getMesaById(int? id);
         void createMesa(Mesa mesa);
+        Mesa getMesa(int? id);
+        void updateMesa(Mesa mesa);
+        void deleteMesa(int? id);
     }
 }

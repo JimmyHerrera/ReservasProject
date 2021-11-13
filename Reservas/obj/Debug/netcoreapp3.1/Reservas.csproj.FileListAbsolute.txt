@@ -171,8 +171,8 @@ C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Mesas\Create.cshtml.g.cs
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Mesas\Edit.cshtml.g.cs
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Mesas\Delete.cshtml.g.cs
-C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Reservas.csproj.AssemblyReference.cache
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Reserva\Index.cshtml.g.cs
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Reserva\Create.cshtml.g.cs
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Reserva\Edit.cshtml.g.cs
 C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Razor\Views\Reserva\Delete.cshtml.g.cs
+C:\Users\jimmy\source\repos\Reservas\Reservas\obj\Debug\netcoreapp3.1\Reservas.csproj.AssemblyReference.cache

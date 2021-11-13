@@ -9,6 +9,7 @@ namespace Reservas.Interfaces
     public interface IReserva
     {
         IEnumerable<Reserva> getLista();
+        IEnumerable<Reserva> getLista(String criterio);
         void createReserva(Reserva reserva);
         Reserva getReserva(int? id);
     }

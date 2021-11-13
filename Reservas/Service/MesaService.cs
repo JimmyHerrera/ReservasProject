@@ -13,6 +13,7 @@ namespace Reservas.Service
     {
         private readonly ReservasDbContext _context;
 
+
         public MesaService(ReservasDbContext _context)
         {
             this._context = _context;
@@ -20,7 +21,15 @@ namespace Reservas.Service
 
         public void createMesa(Mesa mesa)
         {
+
             _context.Mesa.Add(mesa);
+            _context.SaveChanges();
+        }
+
+        public void deleteMesa(int? id)
+        {
+            var mesa = _context.Mesa.Find(id);
+            _context.Mesa.Remove(mesa);
             _context.SaveChanges();
         }
 
@@ -29,10 +38,20 @@ namespace Reservas.Service
             return _context.Mesa;
         }
 
+        public Mesa getMesa(int? id)
+        {
+            return _context.Mesa.Find(id);
+        }
+
         public IEnumerable<Mesa> getMesaById(int? id)
         {
             return _context.Mesa.Where(m => m.Estado == 1).ToList();
         }
 
+        public void updateMesa(Mesa mesa)
+        {
+            _context.Mesa.Update(mesa);
+            _context.SaveChanges();
+        }
     }
 }
