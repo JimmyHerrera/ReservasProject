@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Reservas.Models.Reserva>
+
+
+@{
+    ViewData["Title"] = "Lista de Reservas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de Reservas</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Reserva">Agregar nueva reserva</a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Id)</td>
+                        <td>@Html.DisplayNameFor(m => m.NombreCliente)</td>
+                        <td>@Html.DisplayNameFor(m => m.Celular)</td>
+                        <td>@Html.DisplayNameFor(m => m.FechaReserva)</td>
+                        <td>@Html.DisplayNameFor(m => m.MesaId)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.NombreCliente</td>
+                            <td>@item.Celular</td>
+                            <td>@item.FechaReserva</td>
+                            <td>@item.MesaId</td>
+                            <td>
+                                <a asp-controller="Reserva" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Reserva" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No existen registros</p>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,70 @@
+﻿@model Reservas.Models.Reserva
+
+@{
+    ViewData["Title"] = "Crear nueva reserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mesa = ViewBag.Mesa;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Eliminar Reserva</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-body">
+
+                    <form method="post" asp-action="DeleteReserva">
+                        <input type="hidden" asp-for="Id" />
+
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="NombreCliente" class="control-label"></label>
+                            <input asp-for="NombreCliente" class="form-control" />
+                            <span asp-validation-for="NombreCliente" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Celular" class="control-label"></label>
+                            <input asp-for="Celular" class="form-control" />
+                            <span asp-validation-for="Celular" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="FechaReserva" class="control-label"></label>
+                            <input asp-for="FechaReserva" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="FechaReserva" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MesaId" class="control-label"></label>
+                            <select asp-for="MesaId" class="form-control">
+                                <option>Seleccionar numero de mesa</option>
+                                @foreach (var item in mesa)
+                                {
+                                    <option value="@item.Id">@item.NumeroMesa</option>
+                                }
+                            </select>
+                            <span asp-validation-for="MesaId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Eliminar Reserva" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
