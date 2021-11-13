@@ -48,6 +48,11 @@ namespace Reservas.Service
             return _context.Mesa.Where(m => m.Estado == 1).ToList();
         }
 
+        public IEnumerable<Mesa> getMesaByState()
+        {
+            return _context.Mesa.Where(m => m.Estado == 2).ToList();
+        }
+
         public void updateMesa(Mesa mesa)
         {
             _context.Mesa.Update(mesa);

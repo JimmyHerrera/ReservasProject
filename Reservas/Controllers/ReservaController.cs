@@ -13,47 +13,32 @@ namespace Reservas.Controllers
 {
     public class ReservaController : Controller
     {
-        private readonly ReservasDbContext _context;
         private readonly IReserva reservasInterface;
         private readonly IMesa mesasInterface;
 
 
-        public ReservaController(ReservasDbContext context, IReserva reservaInterface,IMesa mesasInterface)
+        public ReservaController(IReserva reservaInterface,IMesa mesasInterface)
         {
-            _context = context;
             this.reservasInterface = reservaInterface;
             this.mesasInterface = mesasInterface;
         }
 
-        /*[Authorize]
-        //Http Get Index
-        public IActionResult Index()
-        {
-            var listaMesas = reservasInterface.getLista();
-            //IEnumerable<Mesa> listMesas = _context.Mesa;
-            return View(listaMesas);
-        }*/
-
         [Authorize]
-        //Http Get Index
         public IActionResult Index(string? criterio)
         {
-           // var listaMesas = reservasInterface.getLista();
            var listaMesas = reservasInterface.getLista(criterio);
             return View(listaMesas);
         }
 
 
         [Authorize]
-        //Http Get Create
         public IActionResult Create()
         {
-            ViewBag.Mesa = _context.Mesa.Where(m=> m.Estado == 2).ToList();
+            ViewBag.Mesa = mesasInterface.getMesaByState();
             return View();
         }
 
         [Authorize]
-        //Http Post Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Reserva reserva)
@@ -69,89 +54,41 @@ namespace Reservas.Controllers
         }
 
         [Authorize]
-        //Http Get Edit
         public IActionResult Edit(int? id)
         {
             var reserva = reservasInterface.getReserva(id);
-            ViewBag.Mesa = mesasInterface.getMesaById(id);
+            ViewBag.Mesa = mesasInterface.getMesaByState();
             return View(reserva);
         }
+
         [Authorize]
-        //Http Post Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Reserva reserva,int id)
         {
             if (ModelState.IsValid)
             {
-                if(id == reserva.MesaId)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    var a = _context.Reserva.Where(i => id == reserva.Id).FirstOrDefault();
-                    a.MesaId = reserva.MesaId;
-                    _context.Reserva.Update(a);
-                    _context.SaveChanges();
-
-                   var tmp = _context.Mesa.Where(a => a.Id == id).FirstOrDefault();
-                    tmp.Estado = 2;
-
-                    _context.Update(tmp);
-                    _context.SaveChanges();
-
-                    var mesa = _context.Mesa.Where(a => a.Id == reserva.MesaId).FirstOrDefault();
-                    mesa.Estado = 3;
-                    
-                    _context.Update(mesa);
-                    _context.SaveChanges();
-
-                   
-                }
-
-
+                reservasInterface.updateReserva(reserva, id);
                 TempData["mensaje"] = "La reserva se ha editado correctamente";
                 return RedirectToAction("Index");
             }
 
             return View();
         }
+
         [Authorize]
-        //Http Get Delete
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            //Obtener la mesa
-
-            var reserva = _context.Reserva.Where(i => i.Id == id).Include(a => a.Mesa).FirstOrDefault();
-
-
+            var reserva = reservasInterface.getReserva(id);
             return View(reserva);
         }
+
         [Authorize]
-        //Http Post Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteReserva(int? id)
         {
-            //Obtener mesa por id
-            
-            var reserva = _context.Reserva.Find(id);
-
-            _context.Reserva.Remove(reserva);
-            _context.SaveChanges();
-
-
-            var mesa = _context.Mesa.Where(a => a.Id == reserva.MesaId).FirstOrDefault();
-            mesa.Estado = 2;
-
-            _context.Update(mesa);
-            _context.SaveChanges();
+            reservasInterface.deleteReserva(id);
 
             TempData["mensaje"] = "La reserva se ha eliminado correctamente";
             return RedirectToAction("Index");

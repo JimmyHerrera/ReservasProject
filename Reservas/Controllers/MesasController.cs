@@ -13,12 +13,11 @@ namespace Reservas.Controllers
 {
     public class MesasController : Controller
     {
-        private readonly ReservasDbContext _context;
+
         private readonly IMesa mesaInterface;
 
-        public MesasController(ReservasDbContext context, IMesa mesaInterface)
+        public MesasController(IMesa mesaInterface)
         {
-            _context = context;
             this.mesaInterface = mesaInterface;
         }
 

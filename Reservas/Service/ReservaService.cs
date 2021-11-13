@@ -33,7 +33,20 @@ namespace Reservas.Service
             _context.SaveChanges();
         }
 
-    
+        public void deleteReserva(int? id)
+        {
+            var reserva = _context.Reserva.Find(id);
+
+            _context.Reserva.Remove(reserva);
+            _context.SaveChanges();
+
+
+            var mesa = _context.Mesa.Where(a => a.Id == reserva.MesaId).FirstOrDefault();
+            mesa.Estado = 2;
+
+            _context.Update(mesa);
+            _context.SaveChanges();
+        }
 
         public IEnumerable<Reserva> getLista()
         {
@@ -61,6 +74,28 @@ namespace Reservas.Service
             return _context.Reserva.Where(a => a.Id == id).Include(m => m.Mesa).FirstOrDefault();
         }
 
+        public void updateReserva(Reserva reserva, int id)
+        {
+            var a = _context.Reserva.Where(i => id == reserva.Id).FirstOrDefault();
+            a.MesaId = reserva.MesaId;
+            a.NombreCliente = reserva.NombreCliente;
+            a.FechaReserva = reserva.FechaReserva;
+            a.Celular = reserva.Celular;
 
+            _context.Reserva.Update(a);
+            _context.SaveChanges();
+
+            var tmp = _context.Mesa.Where(a => a.Id == id).FirstOrDefault();
+            tmp.Estado = 2;
+
+            _context.Update(tmp);
+            _context.SaveChanges();
+
+            var mesa = _context.Mesa.Where(a => a.Id == reserva.MesaId).FirstOrDefault();
+            mesa.Estado = 3;
+
+            _context.Update(mesa);
+            _context.SaveChanges();
+        }
     }
 }

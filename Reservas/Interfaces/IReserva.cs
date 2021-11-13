@@ -12,5 +12,8 @@ namespace Reservas.Interfaces
         IEnumerable<Reserva> getLista(String criterio);
         void createReserva(Reserva reserva);
         Reserva getReserva(int? id);
+        void updateReserva(Reserva reserva, int id);
+        void deleteReserva(int? id);
+
     }
 }
