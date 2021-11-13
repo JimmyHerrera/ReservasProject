@@ -28,5 +28,11 @@ namespace Reservas.Service
         {
             return _context.Mesa;
         }
+
+        public IEnumerable<Mesa> getMesaById(int? id)
+        {
+            return _context.Mesa.Where(m => m.Estado == 1).ToList();
+        }
+
     }
 }

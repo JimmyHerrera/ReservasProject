@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reservas.Data;
 using Reservas.Interfaces;
 using Reservas.Models;
@@ -13,13 +14,17 @@ namespace Reservas.Controllers
     {
         private readonly ReservasDbContext _context;
         private readonly IReserva reservasInterface;
+        private readonly IMesa mesasInterface;
 
-        public ReservaController(ReservasDbContext context, IReserva reservaInterface)
+
+        public ReservaController(ReservasDbContext context, IReserva reservaInterface,IMesa mesasInterface)
         {
             _context = context;
             this.reservasInterface = reservaInterface;
+            this.mesasInterface = mesasInterface;
         }
 
+        [Authorize]
         //Http Get Index
         public IActionResult Index()
         {
@@ -28,6 +33,7 @@ namespace Reservas.Controllers
             return View(listaMesas);
         }
 
+        [Authorize]
         //Http Get Create
         public IActionResult Create()
         {
@@ -35,6 +41,7 @@ namespace Reservas.Controllers
             return View();
         }
 
+        [Authorize]
         //Http Post Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -43,7 +50,6 @@ namespace Reservas.Controllers
             if (ModelState.IsValid)
             {
                 reservasInterface.createReserva(reserva);
-                reserva.Mesa.Estado = 2;
                 TempData["mensaje"] = "La reserva se ha creado correctamente";
                 return RedirectToAction("Index");
             }
@@ -51,26 +57,15 @@ namespace Reservas.Controllers
             return View();
         }
 
+        [Authorize]
         //Http Get Edit
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            //Obtener el reserva
-
-            var reserva = _context.Reserva.Find(id);
-
-            if (reserva == null)
-            {
-                return NotFound();
-            }
-            ViewBag.Mesa = _context.Mesa.Where(m => m.Estado == 1).ToList();
+            var reserva = reservasInterface.getReserva(id);
+            ViewBag.Mesa = mesasInterface.getMesaById(id);
             return View(reserva);
         }
-
+        [Authorize]
         //Http Post Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -87,7 +82,7 @@ namespace Reservas.Controllers
 
             return View();
         }
-
+        [Authorize]
         //Http Get Delete
         public IActionResult Delete(int? id)
         {
@@ -108,7 +103,7 @@ namespace Reservas.Controllers
 
             return View(reserva);
         }
-
+        [Authorize]
         //Http Post Delete
         [HttpPost]
         [ValidateAntiForgeryToken]

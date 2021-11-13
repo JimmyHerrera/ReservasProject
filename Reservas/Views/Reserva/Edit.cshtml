@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label asp-for="MesaId" class="control-label"></label>
                             <select asp-for="MesaId" class="form-control">
-                                <option>Seleccionar numero de mesa</option>
+                                <option >@Model.Mesa.NumeroMesa</option>
                                 @foreach (var item in mesa)
                                 {
                                     <option value="@item.Id">@item.NumeroMesa</option>

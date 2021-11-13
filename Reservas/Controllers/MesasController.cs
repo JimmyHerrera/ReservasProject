@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Reservas.Controllers
 {
@@ -21,6 +22,7 @@ namespace Reservas.Controllers
             this.mesaInterface = mesaInterface;
         }
 
+        [Authorize]
         //Http Get Index
         public IActionResult Index()
         {
@@ -29,12 +31,15 @@ namespace Reservas.Controllers
         }
 
         //Http Get Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
+
         //Http Post Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Mesa mesa)
@@ -50,6 +55,7 @@ namespace Reservas.Controllers
         }
 
         //Http Get Edit
+        [Authorize]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -70,6 +76,7 @@ namespace Reservas.Controllers
         }
 
         //Http Post Edit
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Mesa mesa)
@@ -87,6 +94,7 @@ namespace Reservas.Controllers
         }
 
         //Http Get Delete
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -107,6 +115,7 @@ namespace Reservas.Controllers
         }
 
         //Http Post Delete
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMesa(int? id)

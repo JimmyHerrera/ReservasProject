@@ -10,5 +10,6 @@ namespace Reservas.Interfaces
     {
         IEnumerable<Reserva> getLista();
         void createReserva(Reserva reserva);
+        Reserva getReserva(int? id);
     }
 }

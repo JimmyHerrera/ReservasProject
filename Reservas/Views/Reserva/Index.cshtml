@@ -25,6 +25,17 @@
             <a class="btn btn-success d-block" asp-action="Create" asp-controller="Reserva">Agregar nueva reserva</a>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            
+            <input id="Buscar" class="form-control" />
+            
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Buscar"></a>
+        </div>
+
+    </div>
 
     <div class="row mt-3">
         @if (Model.Count() > 0)

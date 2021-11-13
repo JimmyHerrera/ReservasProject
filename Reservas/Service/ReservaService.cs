@@ -23,12 +23,26 @@ namespace Reservas.Service
         {
             _context.Reserva.Add(reserva);
             _context.SaveChanges();
+            var id = reserva.MesaId;
+
+            var ad = _context.Reserva.Where(a => a.FechaReserva == reserva.FechaReserva).ToList();
+
+            Mesa mesae = _context.Mesa.Where(a => a.Id == id).FirstOrDefault();
+            mesae.Estado = 2;
+            _context.Update(mesae);
+            _context.SaveChanges();
         }
+
+    
 
         public IEnumerable<Reserva> getLista()
         {
             return _context.Reserva.Include(m => m.Mesa).ToList();
         }
 
+        public Reserva getReserva(int? id)
+        {
+            return _context.Reserva.Where(a => a.Id == id).Include(m => m.Mesa).FirstOrDefault();
+        }
     }
 }
