@@ -8,7 +8,7 @@
 
 <div class="container">
 
-    @if(TempData["mensaje"] !=null)
+    @if (TempData["mensaje"] != null)
     {
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             @TempData["mensaje"]
@@ -27,7 +27,7 @@
     </div>
 
     <div class="row mt-3">
-        @if (Model.Count() > 0) 
+        @if (Model.Count() > 0)
         {
             <table class="table table-bordered table-striped">
                 <thead>
@@ -42,36 +42,36 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>@item.NumeroMesa</td>
-                        <td>@item.NumeroPersonas</td>
-                        <td>@item.Descripcion</td>
+                        <tr>
+                            <td>@item.NumeroMesa</td>
+                            <td>@item.NumeroPersonas</td>
+                            <td>@item.Descripcion</td>
 
-                        @if (@item.Estado == 1)
-                        {
-                            <td>Creado</td>
-                        }
+                            @if (@item.Estado == 1)
+                            {
+                                <td>Creado</td>
+                            }
 
-                        @if (@item.Estado == 2)
-                        {
-                            <td>Libre</td>
-                        }
+                            @if (@item.Estado == 2)
+                            {
+                                <td>Libre</td>
+                            }
 
-                        @if (@item.Estado == 3)
-                        {
-                            <td>Reservado</td>
-                        }
+                            @if (@item.Estado == 3)
+                            {
+                                <td>Reservado</td>
+                            }
 
-                        @if (item.Estado == 1 | item.Estado == 2)
-                    {
-                    <td>
-                        <a asp-controller="Mesas" asp-action="Edit" id="editMesa" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
-                        <a asp-controller="Mesas" asp-action="Delete" id="deleteMesa" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
-                    </td>
-                    }
+                            @if (item.Estado == 1 | item.Estado == 2)
+                            {
+                                <td>
+                                    <a asp-controller="Mesas" asp-action="Edit" id="editMesa" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                                    <a asp-controller="Mesas" asp-action="Delete" id="deleteMesa" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            }
 
-                        
-                    </tr>
+
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -82,4 +82,4 @@
         }
     </div>
 
-    </div>
+</div>

@@ -20,8 +20,9 @@ namespace Reservas.Controllers
         {
             this.mesaInterface = mesaInterface;
         }
-
+        
         [Authorize]
+        [HttpGet]
         public IActionResult Index()
         {
             var listaMesas = mesaInterface.getLista();

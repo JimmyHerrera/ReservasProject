@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Reservas.Controllers
 {
+
     [Authorize]
     public class HomeController : Controller
     {
@@ -20,7 +21,6 @@ namespace Reservas.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
