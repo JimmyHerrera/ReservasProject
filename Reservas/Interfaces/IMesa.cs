@@ -9,7 +9,7 @@ namespace Reservas.Interfaces
     public interface IMesa
     {
         IEnumerable<Mesa> getLista();
-        IEnumerable<Mesa> getMesaById(int? id);
+        IEnumerable<Mesa> getMesaById();
         IEnumerable<Mesa> getMesaByState();
         void createMesa(Mesa mesa);
         Mesa getMesa(int? id);

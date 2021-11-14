@@ -21,7 +21,6 @@ namespace Reservas.Service
 
         public void createMesa(Mesa mesa)
         {
-
             _context.Mesa.Add(mesa);
             _context.SaveChanges();
         }
@@ -40,10 +39,12 @@ namespace Reservas.Service
 
         public Mesa getMesa(int? id)
         {
-            return _context.Mesa.Find(id);
+            var mesa = _context.Mesa.Where(a => a.Id == id).FirstOrDefault();
+
+            return mesa;
         }
 
-        public IEnumerable<Mesa> getMesaById(int? id)
+        public IEnumerable<Mesa> getMesaById()
         {
             return _context.Mesa.Where(m => m.Estado == 1).ToList();
         }

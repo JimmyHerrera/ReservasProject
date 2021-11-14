@@ -40,7 +40,43 @@ namespace PruebasUnitarias.TestControladorReserva
         }
 
         [Test]
-        public void TestCreateReservaIsOkCase02()
+        public void TestCreateReturnReservaIsOkCase02()
+        {
+
+            var a = new List<Mesa>()
+            {
+                new Mesa()
+                {
+                    Id = 1,
+                    Descripcion = "Prueba",
+                    Estado = 2,
+                    NumeroMesa = "22",
+                    NumeroPersonas = 4
+                },
+                new Mesa()
+                {
+                    Id = 1,
+                    Descripcion = "Prueba 2",
+                    Estado = 2,
+                    NumeroMesa = "23",
+                    NumeroPersonas = 5
+                }
+            };
+
+            mesaRepository.Setup(a => a.getMesaByState()).Returns(a);
+
+            var controller = new ReservaController(null, mesaRepository.Object);
+
+            var view = controller.Create() as ViewResult;
+
+            var mesa = controller.ViewBag.Mesa;
+            
+            Assert.AreEqual(a, mesa);
+            
+        }
+
+        [Test]
+        public void TestCreateReservaIsOkCase03()
         {
             reservaRepository.Setup(a => a.createReserva(new Reserva()));
 
@@ -53,8 +89,96 @@ namespace PruebasUnitarias.TestControladorReserva
             {
                 TempData = tempData
             };
-
+              
             var view = controller.Create(new Reserva());
+
+            Assert.IsInstanceOf<RedirectToActionResult>(view);
+        }
+
+        [Test]
+        public void TestEditReturnReservaIsOkCase04()
+        {
+            var a = new List<Mesa>()
+            {
+                new Mesa()
+                {
+                    Id = 1,
+                    Descripcion = "Prueba",
+                    Estado = 2,
+                    NumeroMesa = "22",
+                    NumeroPersonas = 4
+                },
+                new Mesa()
+                {
+                    Id = 1,
+                    Descripcion = "Prueba 2",
+                    Estado = 2,
+                    NumeroMesa = "23",
+                    NumeroPersonas = 5
+                }
+            };
+
+            reservaRepository.Setup(a => a.getReserva(5)).Returns(new Reserva());
+            mesaRepository.Setup(a => a.getMesaByState()).Returns(a);
+
+            var controller = new ReservaController(reservaRepository.Object, mesaRepository.Object);
+
+            var view = controller.Edit(5) as ViewResult;
+            var mesa = controller.ViewBag.Mesa;
+
+            Assert.IsInstanceOf<Reserva>(view.Model);
+            Assert.AreEqual(a, mesa);
+
+        }
+
+        [Test]
+        public void TestEditReservaIsOkCase05()
+        {
+            reservaRepository.Setup(a => a.updateReserva(new Reserva(),5));
+
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            tempData["mensaje"] = "La reserva se ha editado correctamente";
+
+            var controller = new ReservaController(reservaRepository.Object, null)
+            {
+                TempData = tempData
+            };
+
+            var view = controller.Edit(new Reserva(),5);
+
+            Assert.IsInstanceOf<RedirectToActionResult>(view);
+        }
+
+        [Test]
+        public void TestDeleteReturnReservaIsOkCase06()
+        {
+            reservaRepository.Setup(a => a.getReserva(5)).Returns(new Reserva());
+
+            var controller = new ReservaController(reservaRepository.Object,null);
+
+            var view = controller.Delete(5) as ViewResult;
+
+            Assert.IsInstanceOf<Reserva>(view.Model);
+        }
+
+        [Test]
+        public void TestDeleteReservaIsOkCase07()
+        {
+            reservaRepository.Setup(a => a.deleteReserva(5));
+
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            tempData["mensaje"] = "La reserva se ha eliminado correctamente";
+
+            var controller = new ReservaController(reservaRepository.Object,null)
+            {
+                TempData = tempData
+            };
+
+            var view = controller.DeleteReserva(5);
 
             Assert.IsInstanceOf<RedirectToActionResult>(view);
         }

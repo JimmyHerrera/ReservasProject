@@ -55,17 +55,17 @@ namespace Reservas.Service
 
         public IEnumerable<Reserva> getLista(string criterio)
         {
-            var query = from p in _context.Reserva
+            var query = from p in _context.Reserva.Include(a => a.Mesa)
                         select p;
 
             if (!string.IsNullOrEmpty(criterio))
             {
                 query = from p in query
-                        where p.NombreCliente.ToUpper().Contains(criterio)
+                        where p.NombreCliente.ToUpper().Contains(criterio.ToUpper())
                         select p;
             }
 
-            return query.Include(a => a.Mesa).ToList();
+            return query;
 
         }
 
@@ -76,7 +76,7 @@ namespace Reservas.Service
 
         public void updateReserva(Reserva reserva, int id)
         {
-            var a = _context.Reserva.Where(i => id == reserva.Id).FirstOrDefault();
+            var a = _context.Reserva.Where(i => i.Id == reserva.Id).FirstOrDefault();
             a.MesaId = reserva.MesaId;
             a.NombreCliente = reserva.NombreCliente;
             a.FechaReserva = reserva.FechaReserva;

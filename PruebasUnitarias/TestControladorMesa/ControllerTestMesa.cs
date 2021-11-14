@@ -14,21 +14,21 @@ namespace PruebasUnitarias.TestControladorMesa
 {
     public class ControllerTestMesa
     {
-        private Mock<IMesa> authRepository;
+        private Mock<IMesa> mesaRepository;
 
         [SetUp]
         public void SetUp()
         {
-            authRepository = new Mock<IMesa>();
+            mesaRepository = new Mock<IMesa>();
 
         }
         [Test]
         public void TestIndexListaMesasIsOkCase01()
         {
 
-            authRepository.Setup(a => a.getLista()).Returns(new List<Mesa>());
+            mesaRepository.Setup(a => a.getLista()).Returns(new List<Mesa>());
 
-            var controller = new MesasController(authRepository.Object);
+            var controller = new MesasController(mesaRepository.Object);
 
             var view = controller.Index() as ViewResult;
 
@@ -39,14 +39,14 @@ namespace PruebasUnitarias.TestControladorMesa
         [Test]
         public void TestCreateMesaIsOkCase02()
         {
-            authRepository.Setup(a => a.createMesa(new Mesa()));
+            mesaRepository.Setup(a => a.createMesa(new Mesa()));
 
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
         
             tempData["mensaje"] = "La reserva se ha creado correctamente";
 
-            var controller = new MesasController(authRepository.Object)
+            var controller = new MesasController(mesaRepository.Object)
             {
                 TempData = tempData
             };
@@ -59,9 +59,9 @@ namespace PruebasUnitarias.TestControladorMesa
         [Test]
         public void TestEditReturnMesaIsOkCase03()
         {
-            authRepository.Setup(a => a.getMesa(5)).Returns(new Mesa());
+            mesaRepository.Setup(a => a.getMesa(5)).Returns(new Mesa());
 
-            var controller = new MesasController(authRepository.Object);
+            var controller = new MesasController(mesaRepository.Object);
 
             var view = controller.Edit(5) as ViewResult;
 
@@ -71,14 +71,14 @@ namespace PruebasUnitarias.TestControladorMesa
         [Test]
         public void TestEditMesaIsOkCase04()
         {
-            authRepository.Setup(a => a.createMesa(new Mesa()));
+            mesaRepository.Setup(a => a.createMesa(new Mesa()));
 
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
             tempData["mensaje"] = "La mesa se ha editado correctamente";
 
-            var controller = new MesasController(authRepository.Object)
+            var controller = new MesasController(mesaRepository.Object)
             {
                 TempData = tempData
             };
@@ -91,9 +91,9 @@ namespace PruebasUnitarias.TestControladorMesa
         [Test]
         public void TestDeleteReturnMesaIsOkCase05()
         {
-            authRepository.Setup(a => a.getMesa(5)).Returns(new Mesa());
+            mesaRepository.Setup(a => a.getMesa(5)).Returns(new Mesa());
 
-            var controller = new MesasController(authRepository.Object);
+            var controller = new MesasController(mesaRepository.Object);
 
             var view = controller.Delete(5) as ViewResult;
 
@@ -103,14 +103,14 @@ namespace PruebasUnitarias.TestControladorMesa
         [Test]
         public void TestDeleteMesaIsOkCase06()
         {
-            authRepository.Setup(a => a.deleteMesa(5));
+            mesaRepository.Setup(a => a.deleteMesa(5));
 
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
             tempData["mensaje"] = "La mesa se ha eliminado correctamente";
 
-            var controller = new MesasController(authRepository.Object)
+            var controller = new MesasController(mesaRepository.Object)
             {
                 TempData = tempData
             };

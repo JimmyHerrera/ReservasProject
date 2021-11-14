@@ -1,0 +1,192 @@
+{
+  "id": "13300c34-ce3d-459c-9abc-514c8357fdc4",
+  "version": "2.0",
+  "name": "TestReservas",
+  "url": "https://localhost:44347/",
+  "tests": [{
+    "id": "8a28d6ab-8251-480d-bf5b-df31087ff4d5",
+    "name": "ValidarFormularioReservas",
+    "commands": [{
+      "id": "10a60860-fd19-4617-9848-0d426f26392a",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:44347/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "86c055e9-a13b-4e74-a6c8-2d34fe863409",
+      "comment": "",
+      "command": "click",
+      "target": "id=goReservas",
+      "targets": [
+        ["id=goReservas", "id"],
+        ["linkText=Reservas", "linkText"],
+        ["css=#goReservas", "css:finder"],
+        ["xpath=//a[contains(text(),'Reservas')]", "xpath:link"],
+        ["xpath=//a[@id='goReservas']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, '/Reserva')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Reservas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "96124fdb-cb98-4211-addd-52fe016ec1dc",
+      "comment": "",
+      "command": "click",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Lista de Reservas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "db9657dd-8ff7-4e84-8140-bef06058a0aa",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Lista de Reservas')]", "xpath:innerText"]
+      ],
+      "value": "Lista de Reservas"
+    }, {
+      "id": "3a1e214f-b041-4028-86fc-512be4ef2e63",
+      "comment": "",
+      "command": "click",
+      "target": "id=agregarNuevaReserva",
+      "targets": [
+        ["id=agregarNuevaReserva", "id"],
+        ["linkText=Agregar nueva reserva", "linkText"],
+        ["css=#agregarNuevaReserva", "css:finder"],
+        ["xpath=//a[contains(text(),'Agregar nueva reserva')]", "xpath:link"],
+        ["xpath=//a[@id='agregarNuevaReserva']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, '/Reserva/Create')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Agregar nueva reserva')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3ca7f56e-8510-455a-b0ef-6077ec870dc6",
+      "comment": "",
+      "command": "click",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Crear Nueva Reserva')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d50ac6e8-9145-46ce-a94c-b66d799e6633",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Crear Nueva Reserva')]", "xpath:innerText"]
+      ],
+      "value": "Crear Nueva Reserva"
+    }, {
+      "id": "c37ceef1-7864-4b98-af47-72b8118c653b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "3a13479d-b659-4793-ac5b-711ee0224bc0",
+    "name": "ValidarListaReservas",
+    "commands": [{
+      "id": "bd5af571-2baa-42e8-9b1b-092ec09341a9",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:44347/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "45322cfc-d91a-477c-acfc-07108c20da64",
+      "comment": "",
+      "command": "click",
+      "target": "id=nombreRestaurante",
+      "targets": [
+        ["id=nombreRestaurante", "id"],
+        ["css=#nombreRestaurante", "css:finder"],
+        ["xpath=//h1[@id='nombreRestaurante']", "xpath:attributes"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Restaurante Lobos Marinos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a57a47e1-082b-4547-8296-09754065704f",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=nombreRestaurante",
+      "targets": [
+        ["id=nombreRestaurante", "id"],
+        ["css=#nombreRestaurante", "css:finder"],
+        ["xpath=//h1[@id='nombreRestaurante']", "xpath:attributes"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Restaurante Lobos Marinos')]", "xpath:innerText"]
+      ],
+      "value": "Restaurante Lobos Marinos"
+    }, {
+      "id": "3ffaf1a4-cd34-449a-82ea-52a58ef2f265",
+      "comment": "",
+      "command": "click",
+      "target": "id=goReservas",
+      "targets": [
+        ["id=goReservas", "id"],
+        ["linkText=Reservas", "linkText"],
+        ["css=#goReservas", "css:finder"],
+        ["xpath=//a[contains(text(),'Reservas')]", "xpath:link"],
+        ["xpath=//a[@id='goReservas']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, '/Reserva')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Reservas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f45f518-b42d-4fb1-a7c7-cfb42edce2d8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row:nth-child(1) > .col-sm-6:nth-child(1)",
+      "targets": [
+        ["css=.row:nth-child(1) > .col-sm-6:nth-child(1)", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2aadd0a-de7f-4aff-ab88-43b7c05c6e65",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Lista de Reservas')]", "xpath:innerText"]
+      ],
+      "value": "Lista de Reservas"
+    }, {
+      "id": "5440ad72-58f2-4ad8-b70a-4c94d115241d",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e7b8f2c8-4508-415d-8195-c74906296b8d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["8a28d6ab-8251-480d-bf5b-df31087ff4d5"]
+  }],
+  "urls": ["https://localhost:44347/"],
+  "plugins": []
+}

@@ -1,0 +1,105 @@
+{
+  "id": "323069b6-2bdb-41b0-8757-aa1e27da012c",
+  "version": "2.0",
+  "name": "TestMesa",
+  "url": "https://localhost:44347/",
+  "tests": [{
+    "id": "a2f4c679-30b9-49a0-92da-8e3dbded51b7",
+    "name": "ValidarListaMesas",
+    "commands": [{
+      "id": "f6b65d98-a690-4c13-8944-2393a9201276",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:44347/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a247b54-f298-4ffd-8265-091d42883039",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1900x1060",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6e6fba68-a2ae-4940-af97-0561ec958a41",
+      "comment": "",
+      "command": "click",
+      "target": "id=nombreRestaurante",
+      "targets": [
+        ["id=nombreRestaurante", "id"],
+        ["css=#nombreRestaurante", "css:finder"],
+        ["xpath=//h1[@id='nombreRestaurante']", "xpath:attributes"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Restaurante Lobos Marinos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f40e3d96-aead-440e-89e9-5e5528a30901",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=nombreRestaurante",
+      "targets": [
+        ["id=nombreRestaurante", "id"],
+        ["css=#nombreRestaurante", "css:finder"],
+        ["xpath=//h1[@id='nombreRestaurante']", "xpath:attributes"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Restaurante Lobos Marinos')]", "xpath:innerText"]
+      ],
+      "value": "Restaurante Lobos Marinos"
+    }, {
+      "id": "607deb6c-f21e-4782-8093-6d59d7498614",
+      "comment": "",
+      "command": "click",
+      "target": "id=goMesas",
+      "targets": [
+        ["id=goMesas", "id"],
+        ["linkText=Mesas", "linkText"],
+        ["css=#goMesas", "css:finder"],
+        ["xpath=//a[contains(text(),'Mesas')]", "xpath:link"],
+        ["xpath=//a[@id='goMesas']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, '/Mesas')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Mesas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "39fe5bae-be19-47bc-a01a-7ee98b345fdb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-sm-6:nth-child(1)",
+      "targets": [
+        ["css=.col-sm-6:nth-child(1)", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d92ab00-28bd-4b07-85fb-3b4151d1e90f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Lista de Mesas')]", "xpath:innerText"]
+      ],
+      "value": "Lista de Mesas"
+    }, {
+      "id": "51c82864-6844-4b2a-a837-06434ba5fa87",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "ad880d33-b468-4acc-a3ac-f4d7a5aed96f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a2f4c679-30b9-49a0-92da-8e3dbded51b7"]
+  }],
+  "urls": ["https://localhost:44347/"],
+  "plugins": []
+}

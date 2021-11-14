@@ -64,11 +64,11 @@ namespace Reservas.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Reserva reserva,int id)
+        public IActionResult Edit(Reserva reserva,int idR)
         {
             if (ModelState.IsValid)
             {
-                reservasInterface.updateReserva(reserva, id);
+                reservasInterface.updateReserva(reserva, idR);
                 TempData["mensaje"] = "La reserva se ha editado correctamente";
                 return RedirectToAction("Index");
             }

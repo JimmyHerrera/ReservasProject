@@ -1,0 +1,102 @@
+{
+  "id": "13300c34-ce3d-459c-9abc-514c8357fdc4",
+  "version": "2.0",
+  "name": "TestReservas",
+  "url": "https://localhost:44347/",
+  "tests": [{
+    "id": "8a28d6ab-8251-480d-bf5b-df31087ff4d5",
+    "name": "Untitled",
+    "commands": []
+  }, {
+    "id": "3a13479d-b659-4793-ac5b-711ee0224bc0",
+    "name": "ValidarListaReservas",
+    "commands": [{
+      "id": "bd5af571-2baa-42e8-9b1b-092ec09341a9",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:44347/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "45322cfc-d91a-477c-acfc-07108c20da64",
+      "comment": "",
+      "command": "click",
+      "target": "id=nombreRestaurante",
+      "targets": [
+        ["id=nombreRestaurante", "id"],
+        ["css=#nombreRestaurante", "css:finder"],
+        ["xpath=//h1[@id='nombreRestaurante']", "xpath:attributes"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Restaurante Lobos Marinos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a57a47e1-082b-4547-8296-09754065704f",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=nombreRestaurante",
+      "targets": [
+        ["id=nombreRestaurante", "id"],
+        ["css=#nombreRestaurante", "css:finder"],
+        ["xpath=//h1[@id='nombreRestaurante']", "xpath:attributes"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Restaurante Lobos Marinos')]", "xpath:innerText"]
+      ],
+      "value": "Restaurante Lobos Marinos"
+    }, {
+      "id": "3ffaf1a4-cd34-449a-82ea-52a58ef2f265",
+      "comment": "",
+      "command": "click",
+      "target": "id=goReservas",
+      "targets": [
+        ["id=goReservas", "id"],
+        ["linkText=Reservas", "linkText"],
+        ["css=#goReservas", "css:finder"],
+        ["xpath=//a[contains(text(),'Reservas')]", "xpath:link"],
+        ["xpath=//a[@id='goReservas']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, '/Reserva')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Reservas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f45f518-b42d-4fb1-a7c7-cfb42edce2d8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row:nth-child(1) > .col-sm-6:nth-child(1)",
+      "targets": [
+        ["css=.row:nth-child(1) > .col-sm-6:nth-child(1)", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2aadd0a-de7f-4aff-ab88-43b7c05c6e65",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Lista de Reservas')]", "xpath:innerText"]
+      ],
+      "value": "Lista de Reservas"
+    }, {
+      "id": "5440ad72-58f2-4ad8-b70a-4c94d115241d",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e7b8f2c8-4508-415d-8195-c74906296b8d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["8a28d6ab-8251-480d-bf5b-df31087ff4d5"]
+  }],
+  "urls": ["https://localhost:44347/"],
+  "plugins": []
+}

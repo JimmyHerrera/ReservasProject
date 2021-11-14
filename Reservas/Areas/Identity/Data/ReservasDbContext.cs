@@ -18,8 +18,8 @@ namespace Reservas.Data
         {
         }
 
-        public DbSet<Mesa> Mesa { get; set; }
-        public DbSet<Reserva> Reserva { get; set; }
+        public virtual DbSet<Mesa> Mesa { get; set; }
+        public virtual DbSet<Reserva> Reserva { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
